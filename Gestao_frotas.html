@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Frota</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Adicione estilos personalizados aqui, se necessário */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Controle de Frota</h1>
+        <div id="frota-container"><!--  -->
+            <h2>Registro</h2>
+            <ul id="frota-list">
+                <!-- Aqui será adicionada a lista de veículos dinamicamente -->
+                <div id="css">
+                    <div class="mb-3">
+                        <div id="add-vehicle-form">
+                            <h2></h2>
+                            <label for="vehicle-name">Nome funcionário:</label>
+                            <input type="text" id="vehicle-name">
+                            <label for="vehicle-plate">Placa:</label>
+                            <input type="text" id="vehicle-plate">
+
+                            <div class="row">
+                                <div class="col">
+                                    <br><label for="km-inicial">Km Inicial:</label>
+                                    <input type="number" id="km-inicial" class="form-control" pattern="[0-9]*">
+                                </div>
+                                <div class="col">
+                                    <br><label for="km-final">Km Final:</label>
+                                    <input type="number" id="km-final" class="form-control" pattern="[0-9]*">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="consumo">Consumo:</label>
+                                    <input type="number" id="consumo" class="form-control" disabled>
+                                </div>
+                                <div class="col">
+                                    <label for="km-total">Km Total:</label>
+                                    <input type="number" id="km-total" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="manutencao">Manutenção (a cada 5000 km):</label>
+                                    <input type="text" id="manutencao" class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+            <!-- <label id="resultado">Resultado:</label><br> -->
+            <button id="salvar" class="btn btn-primary btn-lg" onclick="calcularConsumo()">Calcular</button>
+        </div>
+    </div>
+
+    <script>
+        function calcularConsumo() {
+            var kmInicial = parseInt(document.getElementById("km-inicial").value);
+            var kmFinal = parseInt(document.getElementById("km-final").value);
+            var consumo = parseInt(document.getElementById("consumo").value);
+
+            var kmTotal = kmFinal - kmInicial;
+            document.getElementById("km-total").value = kmTotal;
+
+            if (!isNaN(consumo)) {
+                var totalConsumo = consumo * kmTotal;
+                document.getElementById("resultado").innerText = "Consumo total: " + totalConsumo;
+            }
+
+            // var manutencao = Math.floor(kmTotal / 5000);
+            // document.getElementById("manutencao").value = manutencao;
+        }
+    </script>
+</body>
+</html>
